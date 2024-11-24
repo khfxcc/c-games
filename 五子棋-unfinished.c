@@ -6,25 +6,19 @@
 #define BLACK 1
 #define WHITE -1
 
-void draw_map(char [][]);
-void game_start();
+void Drawmap(char [][]);
+void Gamestart();
 void initialize(char[][]);
-int check_map();
+void Put();
+int Checkmap();
+void Showcursor();
 
 int main()
 {
     system("title 五子棋");
     while(1)
     {
-        printf("Press 'Block' to begin,'Esc' to exit.\n");
-        if (getchar() == '\n')
-        {
-            game_start();
-        }else
-        {
-            printf("Bye.");
-            break;
-        }
+        Gamestart();
     }
     return 0;
 }
@@ -53,15 +47,28 @@ void initialize(char map[][])
     }
 }
 
-void game_start()
+void Gamestart()
 {
+    int input;
     int map_num[MAX_ROW*2-1][MAX_COL*2-1] = {{0}};
     char map[MAX_ROW*2-1][MAX_COL*2-1];
     initialize(map[][]);
-    draw_map(map[][]);
+    while (1)
+    {
+        Drawmap(map[][]);
+        input=getch();
+        if(input==27)exit(0);
+        Put();
+    }
 }
 
-void draw_map(char map[][])
+void Drawmap(char map[][])
 {
-    
+    for (int i = 0; i < MAX_ROW*2-1; i++)
+    {
+        for (int j = 0; j < MAX_COL*2-1; j++)
+        {
+            printf("%c",map[i][j]);
+        }
+    }
 }
