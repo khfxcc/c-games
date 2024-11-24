@@ -6,12 +6,15 @@
 #define BLACK 1
 #define WHITE -1
 
-void Drawmap(char [][]);
+void Drawmap();
 void Gamestart();
-void initialize(char[][]);
+void initialize();
 void Put();
 int Checkmap();
 void Showcursor();
+
+int map_num[MAX_ROW*2-1][MAX_COL*2-1] = {{0}};
+char map[MAX_ROW*2-1][MAX_COL*2-1];
 
 int main()
 {
@@ -23,7 +26,7 @@ int main()
     return 0;
 }
 
-void initialize(char map[][])
+void initialize()
 {
     for (int i = 0; i < MAX_ROW*2; i++)
     {
@@ -50,25 +53,22 @@ void initialize(char map[][])
 void Gamestart()
 {
     int input;
-    int map_num[MAX_ROW*2-1][MAX_COL*2-1] = {{0}};
-    char map[MAX_ROW*2-1][MAX_COL*2-1];
-    initialize(map[][]);
+    initialize();
     while (1)
     {
-        Drawmap(map[][]);
+        Drawmap();
         input=getch();
         if(input==27)exit(0);
-        Put();
-    }
+	}
 }
 
-void Drawmap(char map[][])
+void Drawmap()
 {
     for (int i = 0; i < MAX_ROW*2-1; i++)
     {
         for (int j = 0; j < MAX_COL*2-1; j++)
         {
-            printf("%c",map[i][j]);
+            printf("%s",map[i][j]);
         }
     }
 }
