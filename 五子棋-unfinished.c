@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<conio.h>
 
 #define MAX_ROW 15
 #define MAX_COL 15
@@ -13,12 +14,15 @@ void Put();
 int Checkmap();
 void Showcursor();
 
-int map_num[MAX_ROW*2-1][MAX_COL*2-1] = {{0}};
-char map[MAX_ROW*2-1][MAX_COL*2-1];
+int map[MAX_ROW*2-1][MAX_COL*2-1] = {{0}};
+const char *symbols[] = {
+    "©≥", "©ª", "©∑", "©ø", "©”", "©€", 
+    "©ƒ", "©Ã", "©•", "©ß", "©‡", "°™", "©¶", " "
+};
 
 int main()
 {
-    system("title ‰∫îÂ≠êÊ£ã");
+    system("title ŒÂ◊”∆Â");
     while(1)
     {
         Gamestart();
@@ -32,20 +36,20 @@ void initialize()
     {
         for (int j = 0; j < MAX_COL*2; j++)
         {
-            if (i == 0&&j == 0) map[i][j] == "‚îè"; 
-            else if (i == MAX_ROW*2-1&&j == 0) map[i][j] = "‚îó";
-            else if (i == 0&&j == MAX_COL*2-1) map[i][j] = "‚îì";
-            else if (i == MAX_ROW*2-1&&j == MAX_COL*2-1) map[i][j] = "‚îõ";
-            else if (i == 0&&j%2 == 0) map[i][j] = "‚îØ";
-            else if (i == MAX_ROW*2-1&&j%2 == 0) map[i][j] = "‚î∑";
-            else if (i%2 == 0&&j == 0) map[i][j] = "‚î†";
-            else if (i%2 == 0&&j == MAX_COL*2-1) map[i][j] = "‚î®";
-            else if ((i == 0||i == MAX_ROW*2-1)&&j%2 == 1) map[i][j] = "‚îÅ";
-            else if ((j==0||j==MAX_COL*2-1)&&i%2==1) map[i][j] = "‚îÉ";
-            else if (i%2==0&&j%2==0) map[i][j] = "‚îº";
-            else if (i%2==0&&j%2==1) map[i][j] = "‚Äî";
-            else if (i%2==1&&j%2==0) map[i][j] = "‚îÇ";
-            else map[i][j] = " ";
+            if (i == 0 && j == 0) map[i][j] = 0;          // "©≥"
+            else if (i == MAX_ROW * 2 - 2 && j == 0) map[i][j] = 1;   // "©ª"
+            else if (i == 0 && j == MAX_COL * 2 - 2) map[i][j] = 2;   // "©∑"
+            else if (i == MAX_ROW * 2 - 2 && j == MAX_COL * 2 - 2) map[i][j] = 3; // "©ø"
+            else if (i == 0 && j % 2 == 0) map[i][j] = 4;  // "©”"
+            else if (i == MAX_ROW * 2 - 2 && j % 2 == 0) map[i][j] = 5;  // "©€"
+            else if (i % 2 == 0 && j == 0) map[i][j] = 6;  // "©ƒ"
+            else if (i % 2 == 0 && j == MAX_COL * 2 - 2) map[i][j] = 7;  // "©Ã"
+            else if ((i == 0 || i == MAX_ROW * 2 - 2) && j % 2 == 1) map[i][j] = 8;  // "©•"
+            else if ((j == 0 || j == MAX_COL * 2 - 2) && i % 2 == 1) map[i][j] = 9;  // "©ß"
+            else if (i % 2 == 0 && j % 2 == 0) map[i][j] = 10; // "©‡"
+            else if (i % 2 == 0 && j % 2 == 1) map[i][j] = 11; // "°™"
+            else if (i % 2 == 1 && j % 2 == 0) map[i][j] = 12; // "©¶"
+            else map[i][j] = 13; // " "
         }
     }
 }
@@ -68,7 +72,8 @@ void Drawmap()
     {
         for (int j = 0; j < MAX_COL*2-1; j++)
         {
-            printf("%s",map[i][j]);
+            printf("%s",symbols[map[i][j]]);
         }
+        printf("\n");
     }
 }
